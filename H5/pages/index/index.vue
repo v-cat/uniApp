@@ -14,6 +14,17 @@
 					<view class="swiper-item uni-bg-blue">C</view>
 				</swiper-item>
 			</swiper>
+		 <div v-for='item in defaultValue'>
+			 <McCapCube
+			 				 v-if="item.component == 'McCapCube'"
+			 				 :id="'widget' + item.id"
+			 				 :key="item.id"
+			 				 :styles="item.styles"
+			 				:cube="item.cube"
+			 				  ></McCapCube> 
+			</div>  
+			
+			 
 		</view>
 		</view>
 	 
@@ -21,8 +32,16 @@
 
 <script setup>
 	import {
-		ref
+		ref,onMounted
 	} from 'vue'
+	import  mockData from './mock.js';
+	const defaultValue=ref()
+	onMounted(()=>{
+		  defaultValue.value=mockData.data.pages[0].componentList
+		// console.log('show',defaultValue.value)  
+	})
+	const cube=ref({})
+	import McCapCube from'@/components/McCapCube/index.vue'
 	const swiperData = ref({
 		 background: ['color1', 'color2', 'color3'],
 		            indicatorDots: true,
